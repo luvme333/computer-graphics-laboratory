@@ -81,4 +81,43 @@ namespace Laboratory_work_1
             return resultColor;
         }
     }
+    
+    class LinearCorrection : Filters 
+    {
+        private double Brightness = 0, NewBrightness = 0;
+        private double maxBrightness = 0, minBrightness = 255;
+        protected double calculateNewBrightness(double max, double min, double value)
+        {
+            return (value - min) * 255 / (max - min);
+        }
+        protected override Color calculateNewPixelColor(Bitmap sourceImage, int x, int y)
+        {
+            Color sourceColor = sourceImage.GetPixel(x, y);
+            Brightness = 0.299 * sourceColor.R + 0.587 * sourceColor.G + sourceColor.B * 0.114;
+            if (x == 0 && y == 0)
+            {
+                for (int i = 0; i < sourceImage.Width; i++)
+                {
+                    for (int j = 0; j < sourceImage.Height; j++)
+                    {
+                        sourceColor = sourceImage.GetPixel(i, j);
+                        Brightness = 0.299 * sourceColor.R + 0.587 * sourceColor.G + sourceColor.B * 0.114;
+                        if (minBrightness > Brightness)
+                        {
+                            minBrightness = Brightness;
+                        }
+                        if (maxBrightness < Brightness)
+                        {
+                           maxBrightness = Brightness;
+                        }
+                    }
+                }
+            }     
+            NewBrightness = calculateNewBrightness(maxBrightness, minBrightness, Brightness);
+            Color resultColor = Color.FromArgb((int)sourceColor.R * (int) (NewBrightness / Brightness), 
+                sourceColor.G * (int) (NewBrightness / Brightness), 
+                (int)sourceColor.B * (int) (NewBrightness / Brightness));
+            return resultColor;
+        }
+    }
 }

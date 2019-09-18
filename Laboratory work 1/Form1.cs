@@ -54,7 +54,7 @@ namespace Laboratory_work_1
         }
         private void ЛинейноеРастяжениеГистограммыToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            LinearCorrection filter = new LinearCorrection();
+            Waves filter = new Waves();
             Bitmap resultImage = filter.processImage(image);
             pictureBox1.Image = resultImage;
             pictureBox1.Refresh();

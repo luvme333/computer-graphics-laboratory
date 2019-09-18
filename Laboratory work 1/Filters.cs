@@ -133,4 +133,28 @@ namespace Laboratory_work_1
             }
         }
     }
+
+    class Waves 
+    {
+        private int newX = 0, newY = 0;
+        public Bitmap processImage(Bitmap sourceImage)
+        {
+            Bitmap resultImage = new Bitmap(sourceImage.Width, sourceImage.Height);
+            for (int i=0; i<sourceImage.Width - 1; i++)
+            {
+                for (int j=0; j<sourceImage.Height; j++)
+                {
+                    Color sourceColor = sourceImage.GetPixel(i, j);
+                    newX = i + (int) (20 * Math.Sin(2 * Math.PI * i / 30));
+                    newY = j;
+                    if (newX >= sourceImage.Width || newX < 0)
+                    {
+                        newX = i;
+                    }
+                    resultImage.SetPixel(newX, newY, sourceColor);
+                }
+            }
+            return resultImage;
+        }
+    }
 }

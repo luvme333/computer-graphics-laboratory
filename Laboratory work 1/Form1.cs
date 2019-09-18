@@ -47,6 +47,13 @@ namespace Laboratory_work_1
 
         private void СерыйМирToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            GrayWorldFilter filter = new GrayWorldFilter();
+            Bitmap resultImage = filter.processImage(image);
+            pictureBox1.Image = resultImage;
+            pictureBox1.Refresh();
+        }
+        private void ЛинейноеРастяжениеГистограммыToolStripMenuItem_Click(object sender, EventArgs e)
+        {
             LinearCorrection filter = new LinearCorrection();
             Bitmap resultImage = filter.processImage(image);
             pictureBox1.Image = resultImage;

@@ -47,7 +47,7 @@ namespace Laboratory_work_1
 
     class GrayWorldFilter : Filters
     {
-        private int R_Sum = 0, G_Sum = 0, B_Sum = 0, R_Result =0, G_Result = 0, B_Result = 0, N;
+        private int R_Sum = 0, G_Sum = 0, B_Sum = 0, R_Result = 0, G_Result = 0, B_Result = 0, N;
         private int R_Avg = 0, G_Avg = 0, B_Avg = 0, Avg = 0;
         
         protected override Color calculateNewPixelColor(Bitmap sourceImage, int x, int y)
@@ -86,6 +86,7 @@ namespace Laboratory_work_1
     {
         private double Brightness = 0, NewBrightness = 0;
         private double maxBrightness = 0, minBrightness = 255;
+        private int R_Result = 0, G_Result = 0, B_Result = 0;
         protected double calculateNewBrightness(double max, double min, double value)
         {
             return (value - min) * 255 / (max - min);
@@ -114,10 +115,22 @@ namespace Laboratory_work_1
                 }
             }     
             NewBrightness = calculateNewBrightness(maxBrightness, minBrightness, Brightness);
-            Color resultColor = Color.FromArgb((int)sourceColor.R * (int) (NewBrightness / Brightness), 
-                sourceColor.G * (int) (NewBrightness / Brightness), 
-                (int)sourceColor.B * (int) (NewBrightness / Brightness));
-            return resultColor;
+            if (Brightness > 0)
+            {
+                R_Result = (int) (sourceColor.R * NewBrightness / Brightness);
+                G_Result = (int) (sourceColor.G *  NewBrightness / Brightness);
+                B_Result = (int) (sourceColor.B * NewBrightness / Brightness);
+                R_Result = Clamp(R_Result, 0, 255);
+                G_Result = Clamp(G_Result, 0, 255);
+                B_Result = Clamp(B_Result, 0, 255);
+                Color resultColor = Color.FromArgb(R_Result, G_Result, B_Result);
+                return resultColor;
+            }
+            else
+            {
+                Color resultColor = Color.FromArgb(sourceColor.R, sourceColor.G, sourceColor.B);
+                return resultColor;
+            }
         }
     }
 }

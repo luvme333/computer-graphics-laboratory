@@ -145,7 +145,7 @@ namespace Laboratory_work_1
                 for (int j=0; j<sourceImage.Height; j++)
                 {
                     Color sourceColor = sourceImage.GetPixel(i, j);
-                    newX = i + (int) (20 * Math.Sin(2 * Math.PI * i / 30));
+                    newX = i + (int) (20 * Math.Sin(2 * Math.PI * j / 30));
                     newY = j;
                     if (newX >= sourceImage.Width || newX < 0)
                     {
@@ -155,6 +155,56 @@ namespace Laboratory_work_1
                 }
             }
             return resultImage;
+        }
+    }
+
+    class MatrixFilter : Filters
+    {
+        protected float[,] kernel = null;
+        protected MatrixFilter() {}
+        public MatrixFilter(float[,] kernel)
+        {
+            this.kernel = kernel;
+        }
+        protected override Color calculateNewPixelColor(Bitmap sourceImage, int x, int y)
+        {
+            int radiusX = kernel.GetLength(0) / 2;
+            int radiusY = kernel.GetLength(1) / 2;
+            float resultR = 0, resultG = 0, resultB = 0;
+            for (int l = -radiusY; l <= radiusY; l++)
+                for (int k = -radiusX; k <= radiusX; k++)
+                {
+                    int idX = Clamp(x + k, 0, sourceImage.Width - 1);
+                    int idY = Clamp(y + l, 0, sourceImage.Height - 1);
+                    Color neighborColor = sourceImage.GetPixel(idX, idY);
+                    resultR += neighborColor.R * kernel[k + radiusX, l + radiusY];
+                    resultG += neighborColor.G * kernel[k + radiusX, l + radiusY];
+                    resultB += neighborColor.B * kernel[k + radiusX, l + radiusY];
+                }
+            return Color.FromArgb(
+                Clamp((int) resultR, 0, 255),
+                Clamp((int) resultG, 0, 255),
+                Clamp((int) resultB, 0, 255));
+        }
+    }
+
+    class SharpnessFilter : MatrixFilter
+    {
+        public SharpnessFilter()
+        {
+            kernel = new float[3, 3];
+            for (int i=0; i<3; i++)
+                for (int j=0; j<3; j++)
+                {
+                    if (i==1 && j==1)
+                    {
+                        kernel[i, j] = 9;
+                    }
+                    else
+                    {
+                        kernel[i, j] = -1;
+                    }
+                }
         }
     }
 }

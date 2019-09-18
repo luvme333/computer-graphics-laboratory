@@ -54,7 +54,21 @@ namespace Laboratory_work_1
         }
         private void ЛинейноеРастяжениеГистограммыToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            LinearCorrection filter = new LinearCorrection();
+            Bitmap resultImage = filter.processImage(image);
+            pictureBox1.Image = resultImage;
+            pictureBox1.Refresh();
+        }
+        private void ВолныToolStripMenuItem_Click(object sender, EventArgs e)
+        {
             Waves filter = new Waves();
+            Bitmap resultImage = filter.processImage(image);
+            pictureBox1.Image = resultImage;
+            pictureBox1.Refresh();
+        }
+        private void РезкостьToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SharpnessFilter filter = new SharpnessFilter();
             Bitmap resultImage = filter.processImage(image);
             pictureBox1.Image = resultImage;
             pictureBox1.Refresh();

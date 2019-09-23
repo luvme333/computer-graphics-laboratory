@@ -73,5 +73,49 @@ namespace Laboratory_work_1
             pictureBox1.Image = resultImage;
             pictureBox1.Refresh();
         }
+
+        private void РасширениеToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Dilation filter = new Dilation();
+            Bitmap resultImage = filter.processImage(image);
+            pictureBox1.Image = resultImage;
+            pictureBox1.Refresh();
+        }
+
+        private void СужениеToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Erosion filter = new Erosion();
+            Bitmap resultImage = filter.processImage(image);
+            pictureBox1.Image = resultImage;
+            pictureBox1.Refresh();
+        }
+
+        private void ОткрытиеToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Erosion filter1 = new Erosion();
+            Bitmap resultImage1 = filter1.processImage(image);
+            Dilation filter2 = new Dilation();
+            Bitmap resultImage2 = filter2.processImage(resultImage1);
+            pictureBox1.Image = resultImage2;
+            pictureBox1.Refresh();
+        }
+
+        private void ЗакрытиеToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Dilation filter1 = new Dilation();
+            Bitmap resultImage1 = filter1.processImage(image);
+            Erosion filter2 = new Erosion();
+            Bitmap resultImage2 = filter2.processImage(resultImage1);
+            pictureBox1.Image = resultImage2;
+            pictureBox1.Refresh();
+        }
+
+        private void ГрадиентToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Gradient filter = new Gradient();
+            Bitmap resultImage = filter.processImage(image);
+            pictureBox1.Image = resultImage;
+            pictureBox1.Refresh();
+        }
     }
 }

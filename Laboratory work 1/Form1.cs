@@ -68,7 +68,7 @@ namespace Laboratory_work_1
         }
         private void РезкостьToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            SharpnessFilter filter = new SharpnessFilter();
+            MedianFilter filter = new MedianFilter();
             Bitmap resultImage = filter.processImage(image);
             pictureBox1.Image = resultImage;
             pictureBox1.Refresh();

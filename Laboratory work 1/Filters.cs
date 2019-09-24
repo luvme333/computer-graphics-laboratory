@@ -207,4 +207,50 @@ namespace Laboratory_work_1
                 }
         }
     }
+
+    class MedianFilter : Filters
+    {
+        protected static int radius = 5, size = (radius*2 +1) * (radius*2 +1);
+        protected int medianR, medianG, medianB;
+        protected int R_Result = 0, G_Result = 0, B_Result = 0;
+        protected override Color calculateNewPixelColor(Bitmap sourceImage, int x, int y)
+        {
+            int[] pixelColor_R = new int[size];
+            int[] pixelColor_G = new int[size];
+            int[] pixelColor_B = new int[size];
+            int m = 0;
+            Color sourceColor;
+            for (int l = -radius; l <= radius; l++)
+                for (int k = -radius; k <= radius; k++)
+                {
+                    sourceColor = sourceImage.GetPixel(x + l, y + k);
+                    pixelColor_R[m] = sourceColor.R;
+                    pixelColor_G[m] = sourceColor.G;
+                    pixelColor_B[m] = sourceColor.B;
+                    m++;
+                }
+            Array.Sort(pixelColor_R);
+            Array.Sort(pixelColor_G);
+            Array.Sort(pixelColor_B);
+            medianR = pixelColor_R[size / 2];
+            medianG = pixelColor_G[size / 2];
+            medianB = pixelColor_B[size / 2];
+            sourceColor = sourceImage.GetPixel(x, y);
+            Color resultColor = Color.FromArgb(medianR, medianG, medianB);
+            return resultColor;
+        }
+        public Bitmap processImage(Bitmap sourceImage)
+        {
+            Bitmap resultImage = new Bitmap(sourceImage.Width, sourceImage.Height);
+
+            for (int x = radius; x < sourceImage.Width - radius; x++)
+            {
+                for (int y = radius; y < sourceImage.Height - radius; y++)
+                {
+                    resultImage.SetPixel(x, y, calculateNewPixelColor(sourceImage, x, y));
+                }
+            }
+            return (resultImage);
+        }
+    }
 }

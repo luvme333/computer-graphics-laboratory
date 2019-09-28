@@ -11,6 +11,11 @@ namespace Laboratory_work_1
     abstract class Filters
     {
         protected abstract Color calculateNewPixelColor(Bitmap sourceImage, int x, int y);
+        public int kernelSize;
+        public bool[,] kernel;
+        public bool[,] kernel3 = new bool[3, 3] { { true, false, true }, { false, true, false }, { true, false, true } };
+        public bool[,] kernel5 = new bool[5, 5];
+        public bool[,] kernel7 = new bool[7, 7];
         public Bitmap processImage(Bitmap sourceImage)
         {
             Bitmap resultImage = new Bitmap(sourceImage.Width, sourceImage.Height);
@@ -210,7 +215,7 @@ namespace Laboratory_work_1
 
     class MedianFilter : Filters
     {
-        protected static int radius = 5, size = (radius*2 +1) * (radius*2 +1);
+        protected static int radius = 1, size = (radius*2 +1) * (radius*2 +1);
         protected int medianR, medianG, medianB;
         protected int R_Result = 0, G_Result = 0, B_Result = 0;
         protected override Color calculateNewPixelColor(Bitmap sourceImage, int x, int y)

@@ -68,7 +68,7 @@ namespace Laboratory_work_1
         }
         private void РезкостьToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MedianFilter filter = new MedianFilter();
+            SharpnessFilter filter = new SharpnessFilter();
             Bitmap resultImage = filter.processImage(image);
             pictureBox1.Image = resultImage;
             pictureBox1.Refresh();
@@ -76,6 +76,8 @@ namespace Laboratory_work_1
 
         private void РасширениеToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            Laboratory_work_1.Form2 form = new Laboratory_work_1.Form2();
+            form.ShowDialog();
             Dilation filter = new Dilation();
             Bitmap resultImage = filter.processImage(image);
             pictureBox1.Image = resultImage;
@@ -117,5 +119,14 @@ namespace Laboratory_work_1
             pictureBox1.Image = resultImage;
             pictureBox1.Refresh();
         }
+
+        private void МедианныйToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MedianFilter filter = new MedianFilter();
+            Bitmap resultImage = filter.processImage(image);
+            pictureBox1.Image = resultImage;
+            pictureBox1.Refresh();
+        }
+
     }
 }

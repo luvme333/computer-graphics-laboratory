@@ -9,10 +9,9 @@ namespace Laboratory_work_1
 {
     class Dilation: Filters
     {
-        //protected bool[,] kernel = new bool[3, 3] {{ false, true, false }, { true, true, true }, { false, true, false } };
-        protected bool[,] kernel = new bool[3, 3] { { true, false, true }, { false, true, false }, { true, false, true } };
         protected override Color calculateNewPixelColor(Bitmap sourceImage, int x, int y)
         {
+            kernel = kernel3;
             int MH = kernel.GetLength(0);
             int MW = kernel.GetLength(0);
             int maxR = 0, maxG = 0, maxB = 0;
@@ -37,6 +36,7 @@ namespace Laboratory_work_1
         }
         public Bitmap processImage(Bitmap sourceImage)
         {
+            kernel = kernel3;
             int MH = kernel.GetLength(0);
             int MW = kernel.GetLength(0);
             Bitmap resultImage = new Bitmap(sourceImage.Width, sourceImage.Height);
@@ -54,8 +54,6 @@ namespace Laboratory_work_1
 
     class Erosion : Filters
     {
-        protected bool[,] kernel = new bool[3, 3] { { true, false, true }, { false, true, false }, { true, false, true } };
-
         protected override Color calculateNewPixelColor(Bitmap sourceImage, int x, int y)
         {
             int MH = kernel.GetLength(0);
@@ -100,8 +98,6 @@ namespace Laboratory_work_1
 
     class Gradient : Filters
     {
-        protected bool[,] kernel = new bool[3, 3] { { false, true, false }, { true, true, true }, { false, true, false } };
-
         protected override Color calculateNewPixelColor(Bitmap sourceImage, int x, int y)
         {
             int MH = kernel.GetLength(0);

@@ -11,11 +11,25 @@ namespace Laboratory_work_1
     abstract class Filters
     {
         protected abstract Color calculateNewPixelColor(Bitmap sourceImage, int x, int y);
-        public int kernelSize;
         public bool[,] kernel;
-        public bool[,] kernel3 = new bool[3, 3] { { true, false, true }, { false, true, false }, { true, false, true } };
-        public bool[,] kernel5 = new bool[5, 5];
-        public bool[,] kernel7 = new bool[7, 7];
+        public bool[,] kernel3 = new bool[3, 3] { { true, false, true }, 
+                                                  { false, true, false }, 
+                                                  { true, false, true } };
+
+        public bool[,] kernel5 = new bool[5, 5] { { false, true, true, true, false }, 
+                                                  { true, true, true, true, true },
+                                                  { true, true, true, true, true },
+                                                  { true, true, true, true, true},
+                                                  { false, true, true, true, false}};
+
+        public bool[,] kernel7 = new bool[7, 7] { { false, false, true, true, true, false, false }, 
+                                                  { false, true, true, true, true, true, false },
+                                                  { true, true, true, true, true, true, true },
+                                                  { true, true, true, true, true, true, true },
+                                                  { true, true, true, true, true, true, true },
+                                                  { false, true, true, true, true, true, false },
+                                                  { false, false, true, true, true, false, false }};
+
         public Bitmap processImage(Bitmap sourceImage)
         {
             Bitmap resultImage = new Bitmap(sourceImage.Width, sourceImage.Height);

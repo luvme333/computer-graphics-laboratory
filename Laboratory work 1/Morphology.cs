@@ -9,9 +9,16 @@ namespace Laboratory_work_1
 {
     class Dilation: Filters
     {
+        public int kernelSize;
         protected override Color calculateNewPixelColor(Bitmap sourceImage, int x, int y)
         {
-            kernel = kernel3;
+            switch(kernelSize)
+            {
+                case 3: kernel = kernel3; break;
+                case 5: kernel = kernel5; break;
+                case 7: kernel = kernel7; break;
+            }
+            //kernel = kernel3;
             int MH = kernel.GetLength(0);
             int MW = kernel.GetLength(0);
             int maxR = 0, maxG = 0, maxB = 0;
@@ -36,7 +43,12 @@ namespace Laboratory_work_1
         }
         public Bitmap processImage(Bitmap sourceImage)
         {
-            kernel = kernel3;
+            switch(kernelSize)
+            {
+                case 3: kernel = kernel3; break;
+                case 5: kernel = kernel5; break;
+                case 7: kernel = kernel7; break;
+            }
             int MH = kernel.GetLength(0);
             int MW = kernel.GetLength(0);
             Bitmap resultImage = new Bitmap(sourceImage.Width, sourceImage.Height);
@@ -54,8 +66,15 @@ namespace Laboratory_work_1
 
     class Erosion : Filters
     {
+        public int kernelSize;
         protected override Color calculateNewPixelColor(Bitmap sourceImage, int x, int y)
         {
+            switch(kernelSize)
+            {
+                case 3: kernel = kernel3; break;
+                case 5: kernel = kernel5; break;
+                case 7: kernel = kernel7; break;
+            }
             int MH = kernel.GetLength(0);
             int MW = kernel.GetLength(0);
             int minR = 255, minG = 255, minB = 255;
@@ -81,6 +100,12 @@ namespace Laboratory_work_1
         }
         public Bitmap processImage(Bitmap sourceImage)
         {
+            switch(kernelSize)
+            {
+                case 3: kernel = kernel3; break;
+                case 5: kernel = kernel5; break;
+                case 7: kernel = kernel7; break;
+            }
             int MH = kernel.GetLength(0);
             int MW = kernel.GetLength(0);
             Bitmap resultImage = new Bitmap(sourceImage.Width, sourceImage.Height);
@@ -98,8 +123,15 @@ namespace Laboratory_work_1
 
     class Gradient : Filters
     {
+        public int kernelSize;
         protected override Color calculateNewPixelColor(Bitmap sourceImage, int x, int y)
         {
+            switch(kernelSize)
+            {
+                case 3: kernel = kernel3; break;
+                case 5: kernel = kernel5; break;
+                case 7: kernel = kernel7; break;
+            }
             int MH = kernel.GetLength(0);
             int MW = kernel.GetLength(0);
             int minR = 255, minG = 255, minB = 255, maxR = 0, maxG = 0, maxB = 0;
@@ -136,6 +168,12 @@ namespace Laboratory_work_1
         }
         public Bitmap processImage(Bitmap sourceImage)
         {
+            switch(kernelSize)
+            {
+                case 3: kernel = kernel3; break;
+                case 5: kernel = kernel5; break;
+                case 7: kernel = kernel7; break;
+            }
             int MH = kernel.GetLength(0);
             int MW = kernel.GetLength(0);
             Bitmap resultImage = new Bitmap(sourceImage.Width, sourceImage.Height);
